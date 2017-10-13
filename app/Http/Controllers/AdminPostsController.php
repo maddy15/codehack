@@ -9,6 +9,7 @@ use App\Http\Requests\PostsCreateRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Photo;
+use App\Category;
 class AdminPostsController extends Controller
 {
     /**
@@ -29,7 +30,8 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+        $categories = Category::lists('name','id')->all();
+        return view('admin.post.create',compact('categories'));
     }
 
     /**
@@ -50,6 +52,7 @@ class AdminPostsController extends Controller
             $photo = Photo::create(['file'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+        
         $user->posts()->create($input);
        // Post::create($input);
         
