@@ -41,10 +41,20 @@
 {!!Form::password('password',['class'=>'form-control'])!!}
 </div>
 <br>
+<div class="col-sm-6">
 <div class="form-group">
-{!!Form::submit('Edit Post',['class'=>'btn btn-primary'])!!}
+{!!Form::submit('Edit User',['class'=>'btn btn-primary col-sm-12'])!!}
+</div>
 </div>
 {!!Form::close()!!}
+
+{{Form::open(['method'=>'DELETE','action'=>['AdminUsersController@destroy',$user->id]])}}
+<div class="col-sm-6">
+<div class="form-group">
+{{Form::submit('Delete User',['class'=>'btn btn-danger col-sm-12'])}}
+</div>
+    </div>
+{{Form::close()}}
 </div>
   </div>
    @include('includes.form_error')

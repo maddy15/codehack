@@ -5,6 +5,9 @@
 
 @section('content')
 
+@if(Session::has('message'))
+    <p class="bg-success">{{session('message')}}</p>
+@endif
 <h1>Users</h1>
 <table class="table">
     <thead>
@@ -17,7 +20,7 @@
         <th>Status</th>
         <th>Created</th>
         <th>Updated</th>
-        
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -45,7 +48,12 @@
        <td>{{$user->is_active ? 'Active' : 'Inactive'}}</td>
        <td>{{$user->created_at->diffForHumans()}}</td>
        <td>{{$user->updated_at->diffForHumans()}}</td>
-       
+       <td>
+           {{Form::open(['method'=>'DELETE','action'=>['AdminUsersController@destroy',$user->id]])}}
+           {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
+           
+           {{Form::close()}}
+       </td>
        
     </tr>
     
